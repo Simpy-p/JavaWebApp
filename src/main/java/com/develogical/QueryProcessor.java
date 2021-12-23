@@ -15,21 +15,18 @@ public class QueryProcessor {
                     "English poet, playwright, and actor, widely regarded as the greatest " +
                     "writer in the English language and the world's pre-eminent dramatist.";
         }
+        if(query.toLowerCase().contains("minus") ){
+            ArrayList<String> numbers = new ArrayList<>(Arrays.asList(query.split(":")));
+            ArrayList<String> numbers2 = new ArrayList<>(Arrays.asList(numbers.get(1).split(" ")));
+            List<Integer> numbers3 = numbers2.stream().filter(x->isInteger(x.trim())).map(i-> parseInt(i.trim())).collect(Collectors.toList());
+            return Integer.toString(numbers3.get(0)-numbers3.get(1));
+
+        }
         if(query.toLowerCase().contains("following numbers") ){
             if(query.toLowerCase().contains("largest")){
-
-                String partAfterDot = query.substring(query.indexOf(':') + 2);
                 ArrayList<String> numbers = new ArrayList<>(Arrays.asList(query.split(":")));
                 ArrayList<String> numbers2 = new ArrayList<>(Arrays.asList(numbers.get(2).split(",")));
-//                int largestNumber=-22;
                 return numbers2.stream().map(x->parseInt(x.trim())).max(Integer::compare).toString();
-//
-//                for(int i=0;i<numbers2.size();i++){
-//                    if (largestNumber < parseInt(numbers2.get(i).trim())){
-//                          largestNumber =parseInt(numbers2.get(i).trim());
-//                    }
-//                }
-//                return Integer.toString(largestNumber);
             }
             if(query.toLowerCase().contains("square and a cube")){
 
@@ -68,5 +65,12 @@ public class QueryProcessor {
         }
         return false;
     }
-
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
