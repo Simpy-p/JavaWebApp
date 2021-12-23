@@ -20,6 +20,10 @@ public class QueryProcessorTest {
     public void knowsAboutShakespeare() throws Exception {
         assertThat(queryProcessor.process("Shakespeare"), containsString("playwright"));
     }
+    @Test
+    public void getLargestNumber() throws Exception {
+        assertThat(queryProcessor.process("following numbers is the largest:20946,2090"), containsString("20946"));
+    }
 
     @Test
     public void isNotCaseSensitive() throws Exception {
