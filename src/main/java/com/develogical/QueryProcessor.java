@@ -17,15 +17,18 @@ public class QueryProcessor {
         if(query.toLowerCase().contains("following numbers") ){
             if(query.toLowerCase().contains("largest")){
 
-                String partAfterDot = query.substring(query.indexOf(':') + 1);
-                ArrayList<String> numbers = new ArrayList<>(Arrays.asList(partAfterDot.split(",")));
-                int largestNumber=-22;
-                for(int i=0;i<numbers.size();i++){
-                    if (largestNumber < parseInt(numbers.get(i))){
-                          largestNumber =parseInt(numbers.get(i));
-                    }
-                }
-                return Integer.toString(largestNumber);
+                String partAfterDot = query.substring(query.indexOf(':') + 2);
+                ArrayList<String> numbers = new ArrayList<>(Arrays.asList(query.split(":")));
+                ArrayList<String> numbers2 = new ArrayList<>(Arrays.asList(numbers.get(2).split(",")));
+//                int largestNumber=-22;
+                return numbers2.stream().map(x->parseInt(x.trim())).max(Integer::compare).toString();
+//
+//                for(int i=0;i<numbers2.size();i++){
+//                    if (largestNumber < parseInt(numbers2.get(i).trim())){
+//                          largestNumber =parseInt(numbers2.get(i).trim());
+//                    }
+//                }
+//                return Integer.toString(largestNumber);
             }
         }
 
