@@ -15,6 +15,9 @@ public class QueryProcessor {
                     "English poet, playwright, and actor, widely regarded as the greatest " +
                     "writer in the English language and the world's pre-eminent dramatist.";
         }
+        if(query.toLowerCase().contains("which year was Theresa May first elected as the Prime Minister of Great Britain") ){
+            return "2016";
+        }
         if(query.toLowerCase().contains("minus") ){
             ArrayList<String> numbers = new ArrayList<>(Arrays.asList(query.split(":")));
             ArrayList<String> numbers2 = new ArrayList<>(Arrays.asList(numbers.get(1).split(" ")));
@@ -35,6 +38,8 @@ public class QueryProcessor {
                 ArrayList<String> numbers2 = new ArrayList<>(Arrays.asList(numbers.get(2).split(",")));
                  return numbers2.stream().map(x->parseInt(x.trim())).filter(i-> (isSquare(i)&&isCube(i))).collect(Collectors.toList()).toString();
             }
+
+
 
 
         }
