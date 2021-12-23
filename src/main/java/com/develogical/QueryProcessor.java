@@ -3,6 +3,7 @@ package com.develogical;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 
@@ -30,9 +31,42 @@ public class QueryProcessor {
 //                }
 //                return Integer.toString(largestNumber);
             }
+            if(query.toLowerCase().contains("square and a cube")){
+
+                String partAfterDot = query.substring(query.indexOf(':') + 2);
+                ArrayList<String> numbers = new ArrayList<>(Arrays.asList(query.split(":")));
+                ArrayList<String> numbers2 = new ArrayList<>(Arrays.asList(numbers.get(2).split(",")));
+                 return numbers2.stream().map(x->parseInt(x.trim())).filter(i-> (isSquare(i)&&isCube(i))).collect(Collectors.toList()).toString();
+            }
+
+
         }
 
 
         return "";
     }
+
+    static Boolean isSquare(int n)
+    {
+        for (int i = 0; i < n / 2 + 2; i++)
+        {
+            if (i * i == n)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    static Boolean isCube(int n)
+    {
+        for (int i = 0; i < n / 2 + 2; i++)
+        {
+            if (i * i *i  == n)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
